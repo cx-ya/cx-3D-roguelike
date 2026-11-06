@@ -1,77 +1,132 @@
-# 曾想 3D 飞机 · cx-3D-roguelike
+# cx-3D-roguelike
 
-一个用 Godot 4 做的 3D 太空射击 + Roguelike 成长小游戏。
+A 3D space shooter with roguelite progression, built with **Godot 4**.
 
-飞船在倾斜视角的太空场景里左右闪避，发射激光击碎陨石，
-击杀累积升级、五选一强化、攒金币在商店里永久成长，最后挑战会放弹幕的 BOSS。
-
-## ⬇️ 直接玩
-
-不想装 Godot 的话，下载打包好的 Windows 版本，双击即可运行：
-
-**[⬇ 下载 cx-3D-roguelike v1.0.0 (Windows x64, 单文件 108 MB)](https://github.com/cx-ya/cx-3D-roguelike/releases/latest)**
-
-> Windows 10/11 x64 · 需要支持 Vulkan 的显卡 · 无需安装
+You pilot a single fighter in a tilted camera view, dodging meteors and blasting them into coins.
+Kills level you up, levels give you upgrades, coins buy permanent power in the shop —
+and eventually a boss wakes up and fills the screen with bullets.
 
 ---
 
-## 操作
+## ⬇️ Play now
 
-| 按键 | 作用 |
+Don't want to install Godot? Grab the packaged Windows build and just double-click it.
+
+**[⬇ Download cx-3D-roguelike v1.0.0 (Windows x64, single file, 108 MB)](https://github.com/cx-ya/cx-3D-roguelike/releases/latest)**
+
+> Windows 10/11 x64 · Vulkan-capable GPU required · no installation, no extra files
+
+---
+
+## 🎮 How to play
+
+### Controls
+
+| Input | Action |
 |---|---|
-| `A` / `D` | 左右移动 |
-| 双击 `A` / `D` | 冲刺（冲刺期间无敌，可撞碎陨石触发子弹时间） |
-| `空格` | 发射激光（有射速冷却） |
+| `A` / `D` | Move left / right |
+| **Double-tap** `A` / `D` | Dash |
+| `Space` | Fire laser |
 
----
+### The run
 
-## 主要系统
+1. **Survive and shoot.** Meteors stream toward you. Everything is instantly clear on screen, so keep moving.
+2. **Kill meteors → level up.** Every kill counts toward the next level.
+3. **Level up → pick an upgrade.** The game pauses and offers 5 options:
+   the first 3 are *mechanics* (new behaviour), the last 2 are *stats*.
+4. **Shoot the boss.** It is already standing in the arena, dormant and **invulnerable**, until you reach level 2.
+5. **Die → results screen → shop.** Coins are permanent; spend them and go again.
 
-| 系统 | 说明 |
+### Things that will keep you alive
+
+- **Dash = invincibility frames.** For 0.35 s nothing can touch you. Use it to slip through a wall of meteors.
+- **Dash *into* a meteor** to shatter it: this triggers **bullet time** (everything slows to 15%) and a camera push-in. It is the single strongest move in the game — it clears a meteor *and* gives you free time to line up shots.
+- **Dodge shot** (run upgrade): every perfect dodge automatically fires 3 lasers straight ahead (30 s cooldown).
+- **Shield** (run upgrade): absorbs one whole hit, then recharges over 30 s.
+- **Pets** (run upgrade): follow you and produce coins over time. More pets = faster income.
+
+### Upgrades you will see
+
+| Type | Examples |
 |---|---|
-| **射击** | 基础间隔 1 秒，可被「快速装填」升到 0.1 秒；支持多发齐射 |
-| **冲刺 / 无敌帧** | 双击方向键，0.35 秒无敌 + 位移 5 米 |
-| **完美闪避** | 冲刺撞碎陨石 → 子弹时间（慢放）+ 镜头推近 |
-| **等级** | 击杀陨石累积升级，共 11 级（25 / 50 / 100 / 200 / 320 …） |
-| **局内强化** | 升级时暂停并五选一：前 3 个是机制强化，后 2 个是数值强化 |
-| **宠物** | 跟在飞船后方，定期产出金币（每多一只间隔 -1 秒） |
-| **护盾** | 抵挡一次伤害，破盾后 30 秒充能 |
-| **大招** | 商店购买后每 25 秒自动并列发射 5 颗直线子弹 |
-| **BOSS** | 玩家 2 级时苏醒，150 次命中击破，三阶段弹幕（齐射 / 扇形 / 陨石雨 / 埋伏 / 点射 / 横向扫射） |
-| **商店** | 游戏外永久成长，金币由击杀陨石和宠物产出 |
-| **存档** | 自动存到 `user://save.cfg`，商店内可一键重置 |
+| Mechanics | Multishot (extra parallel lasers), Auto-reload (much faster fire rate), Pet, Wave shot (lasers sine-wave), Dodge shot, Greed (more coins) |
+| Stats | Laser pierce, laser range, dash cooldown, max HP |
+
+### The boss
+
+| Phase | Trigger | What changes |
+|---|---|---|
+| Dormant | After the intro | Stands still, tinted grey-blue, **immune to damage** |
+| Awake | Level 2 (25 kills) | Turns solid, sky darkens, starts firing, **150 hits to kill** |
+| Phase 2 | HP ≤ 50% | Natural meteors ×3 speed, boss turns **red**, attacks faster |
+| Phase 3 | HP ≤ 25% | **Sweeping barrage** from left to right, non-stop, until it dies |
+
+Six attack patterns in rotation: twin volley, fan shot, meteor rain, surround-and-converge,
+rapid snipe, and the phase-3 sweep. **None of them home in on you** — each meteor takes a single
+snapshot of your position and then flies straight, so you can always dodge by moving after the shot.
+
+### Dying
+
+- Hit by a meteor: −50 HP
+- Hit by an obstacle: −20 HP
+- HP reaches 0 → results screen with your kill count, level and coins
+
+Kill the boss instead and you get the **victory** screen.
 
 ---
 
-## 场景结构
+## 🛠 Systems overview
+
+| System | Notes |
+|---|---|
+| **Dash / i-frames** | 0.35 s invulnerability, 5 m displacement, cooldown reduced by shop upgrades |
+| **Bullet time** | `Engine.time_scale` 0.15, triggered by dashing through a meteor |
+| **Levels** | 11 levels · thresholds 25 / 50 / 100 / 200 / 320 / 500 / 750 / 1100 / 1600 / 2200 kills |
+| **Run upgrades** | 5 choices per level-up, 3 mechanical + 2 stat, with fallbacks when maxed |
+| **Shop** | Permanent upgrades, one-time unlocks, prerequisite chains (ultimate → cooldown → ammo) |
+| **Pets** | Follow the ship, hop now and then, spawn coins on a timer |
+| **Boss** | Area3D + Sprite3D, rises from the floor, three phases, 6 attack patterns |
+| **HUD** | Level, coins, HP bar, shoot cooldown, dash, ultimate, shield, dodge shot, boss HP bar |
+| **Save** | `ConfigFile` at `user://save.cfg`, auto-saved on death and purchases |
+
+---
+
+## 📁 Project layout
 
 ```
+Global.gd              autoload singleton: currency, upgrades, levels,
+                       bullet time, save/load
 sences/
-├── main_menu.tscn   主菜单（开始 / 新手教程 / 退出）
-├── shop.tscn        升级商店
-├── game.tscn        一局游戏（3D 场景 + UI 层）
-├── node_3d.tscn     BOSS（Area3D + Sprite3D）
-└── ...              player / laser / meteor / obstacle / pet / hud / levelup / game_over
+├── main_menu.tscn     main menu + tutorial overlay
+├── shop.tscn          permanent upgrade shop
+├── game.tscn          a run: 3D scene + CanvasLayer UI
+├── node_3d.tscn       the boss (Area3D + Sprite3D)
+├── player.tscn        ship: movement, dash, shooting, HP
+├── laser.tscn         player projectile
+├── meteor.tscn        meteor / aimed projectile
+├── obstacle.tscn      static obstacle, collision box fitted from mesh AABB
+├── pet.tscn           coin-producing companion
+├── hud.tscn │ levelup.tscn │ boss_banner.tscn │ game_over.tscn
+└── *.gdshader         procedural sky, noise-displaced floor
 ```
 
-`Global.gd` 是全局数据中心（货币、升级等级、局内等级、子弹时间参数、存档读写）。
+Almost all UI is **built in code** inside thin `Control` scenes — the `.tscn` files only carry
+a root node and a script, which keeps the scene tree small and the layout version-controllable.
 
 ---
 
-## 运行
+## 🚀 Running from source
 
-1. 用 **Godot 4.7.x** 打开本目录（`project.godot`）
-2. F5 运行（主场景是 `main_menu.tscn`）
+1. Open the folder with **Godot 4.7.x** (the project file is `project.godot`)
+2. Press **F5** — the main scene is `main_menu.tscn`
 
-## 导出
+## 📦 Exporting a build
 
-项目内已带 `export_presets.cfg`（Windows Desktop 预设，单文件、pck 内嵌）：
+`export_presets.cfg` already contains a Windows Desktop preset (single file, PCK embedded).
 
-```
-项目 → 导出 → Windows Desktop → 导出项目
-```
+From the editor: **Project → Export → Windows Desktop → Export Project**.
 
-命令行：
+From the command line:
 
 ```bash
 godot --headless --path . --export-release "Windows Desktop" build/game.exe
@@ -79,10 +134,20 @@ godot --headless --path . --export-release "Windows Desktop" build/game.exe
 
 ---
 
-## 存档位置
+## 💾 Save data
 
 ```
 Windows: %APPDATA%\Godot\app_userdata\space shooter 3d\save.cfg
 ```
 
-存档**不在 exe 里**，换一台电脑就是全新进度。商店里有「重置存档」按钮（点两下确认）。
+The save is **not** inside the executable — a fresh machine starts a fresh run.
+The shop has a **Reset save** button (click twice to confirm).
+
+---
+
+## 📄 Assets & license
+
+No license is granted. Code and assets are all rights reserved.
+
+The 3D models in `graphics/` come from a third-party asset pack, and some images in `picture/`
+are third-party artwork; they are **not** covered by any license this project could grant.
