@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bsixsxx4dvb2i"]
+
+[ext_resource type="Texture2D" uid="uid://bc4ml24hbxgxq" path="res://picture/boss.png" id="1_rvkex"]
+[ext_resource type="Script" uid="uid://dct2qcvh71" path="res://sences/boss.gd" id="2_boss"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkqoe"]
+size = Vector3(5.088135, 5.0998535, 1)
+
+[node name="boss" type="Area3D" unique_id=1801472203]
+script = ExtResource("2_boss")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2068466222]
+transform = Transform3D(4, 0, 0, 0, 3.5871289, 1.7698888, 0, -1.7698888, 3.5871289, 0.0058060884, -2.3841858e-07, -0.001039505)
+texture = ExtResource("1_rvkex")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1729390511]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0058060884, -2.3841858e-07, -0.001039505)
+shape = SubResource("BoxShape3D_vkqoe")

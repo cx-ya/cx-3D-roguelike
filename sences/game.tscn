@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://6rrahow460mw"]
+
+[ext_resource type="Script" uid="uid://clondb2e8pish" path="res://sences/game.gd" id="1_a53l5"]
+[ext_resource type="PackedScene" uid="uid://do7e7474usiwl" path="res://sences/player.tscn" id="1_w4np8"]
+[ext_resource type="AudioStream" uid="uid://dryteuo1hqbbg" path="res://audio/spaceship.wav" id="3_pxhlp"]
+[ext_resource type="Shader" uid="uid://daw65o1bpcyvk" path="res://sences/game.gdshader" id="3_qi43j"]
+[ext_resource type="Shader" uid="uid://bhxukkaqx1dkl" path="res://sences/sky.gdshader" id="4_sky"]
+[ext_resource type="PackedScene" path="res://sences/hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://sences/levelup.tscn" id="6_levelup"]
+[ext_resource type="PackedScene" path="res://sences/boss_banner.tscn" id="7_banner"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
+shader = ExtResource("4_sky")
+shader_parameter/zenith_color = Color(0.02, 0.015, 0.06, 1)
+shader_parameter/horizon_color = Color(0.35, 0.22, 0.45, 1)
+shader_parameter/ground_color = Color(0.06, 0.03, 0.1, 1)
+shader_parameter/horizon_sharpness = 1.2
+shader_parameter/star_density = 0.012
+shader_parameter/star_brightness = 2.0
+shader_parameter/nebula_strength = 0.25
+shader_parameter/nebula_color = Color(0.55, 0.25, 0.65, 1)
+
+[sub_resource type="Sky" id="Sky_pxhlp"]
+sky_material = SubResource("ShaderMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_qi43j"]
+background_mode = 2
+sky = SubResource("Sky_pxhlp")
+glow_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qi43j"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qi43j"]
+noise = SubResource("FastNoiseLite_qi43j")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qi43j"]
+render_priority = 0
+shader = ExtResource("3_qi43j")
+shader_parameter/albedo = Color(1, 0.7529, 1, 1)
+shader_parameter/noise_strength = 0.5
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_qi43j")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gjxql"]
+material = SubResource("ShaderMaterial_qi43j")
+size = Vector2(250, 250)
+subdivide_width = 120
+subdivide_depth = 120
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkqoe"]
+size = Vector3(0.82910156, 6.402588, 2.899414)
+
+[node name="Game" type="Node3D" unique_id=2055652795]
+script = ExtResource("1_a53l5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1961430313]
+environment = SubResource("Environment_qi43j")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1964019240]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." unique_id=50389333 instance=ExtResource("1_w4np8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1666052620]
+transform = Transform3D(0.9999619, -0.008726536, 0, 0.0061705923, 0.7070799, 0.7071068, -0.0061705923, -0.7070799, 0.7071068, 0, 12.4104805, 4.2937694)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=256897663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("PlaneMesh_gjxql")
+skeleton = NodePath("../Player")
+
+[node name="Projectlies" type="Node3D" parent="." unique_id=892665822]
+
+[node name="Timers" type="Node3D" parent="." unique_id=1755767839]
+
+[node name="MeteorTimer" type="Timer" parent="Timers" unique_id=1938911977]
+wait_time = 0.25
+autostart = true
+
+[node name="obstacle_timer" type="Timer" parent="Timers" unique_id=1954331967]
+wait_time = 2.0
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=77792209]
+stream = ExtResource("3_pxhlp")
+volume_db = -21.57
+autoplay = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1694703637]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1115497069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+shape = SubResource("BoxShape3D_vkqoe")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=838299100]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2073879791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+shape = SubResource("BoxShape3D_vkqoe")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1537673916]
+layer = 10
+
+[node name="HUD" parent="UI" unique_id=53380525 instance=ExtResource("5_hud")]
+
+[node name="LevelUp" parent="UI" unique_id=466079008 instance=ExtResource("6_levelup")]
+
+[node name="BossBanner" parent="UI" instance=ExtResource("7_banner")]
+
+[connection signal="shoot_laser" from="Player" to="." method="_on_player_shoot_laser"]
+[connection signal="timeout" from="Timers/MeteorTimer" to="." method="_on_meteor_timer_timeout"]
+[connection signal="timeout" from="Timers/obstacle_timer" to="." method="_on_obstacle_timer_timeout"]

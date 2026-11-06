@@ -1,0 +1,19 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# 导出产物（不进仓库）
+build/
+*.exe
+*.pck
+*.zip
+
+# 编辑器 / 系统杂物
+.vscode/
+.idea/
+*.tmp
+.DS_Store
+Thumbs.db
+
+# 本地存档（正常不会出现在项目里，兜底）
+save.cfg

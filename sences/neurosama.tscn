@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bgqupb53aoyq0"]
+
+[ext_resource type="Shader" uid="uid://bqk6dm3cfmntp" path="res://picture/neurosama.gdshader" id="1_2e6ra"]
+[ext_resource type="Script" uid="uid://dp4jmb2vncpdp" path="res://sences/neurosama.gd" id="1_avgd4"]
+[ext_resource type="Texture2D" uid="uid://c11kimvuj8mn3" path="res://picture/258-gif_0_delay-0.1s.png" id="2_kjsd5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_okqhq"]
+render_priority = 0
+shader = ExtResource("1_2e6ra")
+shader_parameter/sprite_sheet = ExtResource("2_kjsd5")
+shader_parameter/fps = 8.0
+shader_parameter/total_frames = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_iwm12"]
+
+[node name="neurosama" type="Node3D" unique_id=31017399]
+script = ExtResource("1_avgd4")
+
+[node name="neurosama" type="MeshInstance3D" parent="." unique_id=1395035407]
+transform = Transform3D(-1.979647, 0.12706117, 0.25466195, -0.021194628, 1.7188231, -1.0223496, -0.28380993, -1.0146444, -1.6999848, 0, 0.6343223, 0)
+material_override = SubResource("ShaderMaterial_okqhq")
+mesh = SubResource("SphereMesh_iwm12")

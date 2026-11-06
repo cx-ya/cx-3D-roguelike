@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bbhjn66cyswqd"]
+
+[ext_resource type="Script" uid="uid://vt1183x6knte" path="res://sences/obstacle.gd" id="1_a2iix"]
+[ext_resource type="PackedScene" uid="uid://ssv350vs4ksk" path="res://graphics/rock.glb" id="1_wc7q7"]
+[ext_resource type="PackedScene" uid="uid://bwfhkn6vnlmm3" path="res://graphics/rock_crystals.glb" id="2_a2iix"]
+[ext_resource type="PackedScene" uid="uid://tiwqjlilt8tx" path="res://graphics/rock_largeA.glb" id="3_wypsb"]
+[ext_resource type="PackedScene" uid="uid://d2jd0gxab52yd" path="res://graphics/rover.glb" id="4_xuig3"]
+[ext_resource type="PackedScene" uid="uid://dslrr1x08jcd1" path="res://graphics/turret_double.glb" id="6_jrc6x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkqoe"]
+size = Vector3(1, 0.7067871, 0.68652344)
+
+[node name="obstacle" type="Area3D" unique_id=839819178]
+script = ExtResource("1_a2iix")
+mesh_scale = 1.6400000000000001
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=138999096]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004128456, 0.38811505, 0)
+shape = SubResource("BoxShape3D_vkqoe")
+
+[node name="meshs" type="Node3D" parent="." unique_id=1645046838]
+
+[node name="rock2" parent="meshs" unique_id=694514377 instance=ExtResource("1_wc7q7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9630322, 0, -1.5700018)
+
+[node name="rock_crystals2" parent="meshs" unique_id=1045705 instance=ExtResource("2_a2iix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8860157, 0, -1.4559758)
+
+[node name="rock_largeA2" parent="meshs" unique_id=935918310 instance=ExtResource("3_wypsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9518647, 0, -1.5712084)
+
+[node name="rover2" parent="meshs" unique_id=296711773 instance=ExtResource("4_xuig3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0379996, 0, -1.4840593)
+
+[node name="turret_double2" parent="meshs" unique_id=490832733 instance=ExtResource("6_jrc6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0206022, -2.3841858e-07, -1.4301634)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

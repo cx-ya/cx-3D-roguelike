@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk1p1nq0xbgdk"]
+
+[ext_resource type="Texture2D" uid="uid://chnlbf3hlqn37" path="res://picture/raf,360x360,075,t,fafafa_ca443f4786.u3.jpg" id="1_vjkkp"]
+[ext_resource type="Script" path="res://sences/pet.gd" id="2_pet"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aemt4"]
+albedo_texture = ExtResource("1_vjkkp")
+
+[sub_resource type="SphereMesh" id="SphereMesh_vkqoe"]
+material = SubResource("StandardMaterial3D_aemt4")
+
+[node name="pet" type="Node3D" unique_id=1729177793]
+script = ExtResource("2_pet")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1914514852]
+transform = Transform3D(-0.9773973, 0.16791508, 0.12844947, -0.084318355, 0.24754724, -0.96520007, -0.19386894, -0.95421433, -0.2277936, 0, 0, 0)
+mesh = SubResource("SphereMesh_vkqoe")

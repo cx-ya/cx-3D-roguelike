@@ -1,0 +1,67 @@
+[gd_scene format=4 uid="uid://d1qq62tn8dwy3"]
+
+[ext_resource type="Script" uid="uid://b0k6hea4prv1n" path="res://sences/laser.gd" id="1_j5ksa"]
+[ext_resource type="Texture2D" uid="uid://cwbougsvfqnig" path="res://graphics/Red_Red.png" id="1_lj48g"]
+[ext_resource type="AudioStream" uid="uid://chauj2dyhuci0" path="res://audio/laser8.wav" id="3_ian0l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybpk1"]
+resource_name = "Red"
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("1_lj48g")
+texture_repeat = false
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_01q60"]
+_surfaces = [{
+"aabb": AABB(-1.890625, -5.671875, -1.890625, 3.78125, 9.453125, 3.78125),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AQACAAQAAAAEAAIAAQAEAAUAAAAFAAQAAQADAAIAAAACAAMAAQAFAAMAAAADAAUA"),
+"lods": [1.3461026, PackedByteArray("AAABAAIAAQADAAIAAAACAAMAAAADAAEA")],
+"name": "Red",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("/38AAP9/AAD/f////38AAP9/zMwAAAAAAADMzP9/AAD//8zM/38AAP9/zMz//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_of1pi"]
+resource_name = "Red_Cylinder_004"
+_surfaces = [{
+"aabb": AABB(-1.890625, -5.671875, -1.890625, 3.78125, 9.453125, 3.78125),
+"attribute_data": PackedByteArray("mb///5m//38zf5ifmb//////mJ+Zv/9/mb//fzN/mJ///5ifmb//////mJ///5ifM3+Yn5m//38zf5if//+Yn5m//////5ifM3+YnzN/mJ///5ifM3+Yn///mJ8zf5if"),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AQACAAoAAAALAAwADQAOAA8AEAARABIABQATAAQAAwAUABUABgAHAAgACQAWABcA"),
+"lods": [1.3461026, PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAIAAcA")],
+"material": SubResource("StandardMaterial3D_ybpk1"),
+"name": "Red",
+"primitive": 3,
+"uv_scale": Vector4(2.0124998, 2, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/38AAP9/lQb/f////38cF/9/zMwAABwX/38AAP9/uQIAAMzM/393Cf9/////f3cJ/3////9/HBcAAMzM/38cF/9/zMwAABwX/38AAP9/lQb//8zM/38cF///zMz/f5UG/3/MzAAAlQb/f////393Cf//zMz/f3cJ/3/MzP//dwn/fwAA/3+5Av9/zMz//7kC///MzP9/uQL/f8zM//93CQAAzMz/f7kC/3/MzP//uQL/f8zMAACVBgAAzMz/f5UGNAPBp8zS5orM0uaKslyFeILonB6C6JweGPXMUhj1zFIY9cxSwSfKfMzS5oo0A8GnNAPBp5uefJebnnyXm558l3kHstx5B7LceQey3ILonB6yXIV4slyFeMEnynzBJ8p8")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_01q60")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j5ksa"]
+data = PackedVector3Array(0, 3.7812998, 0, 0, 1.8906, -1.8906, 1.8906, 1.8906, 0, 0, -5.6719, 0, 1.8906, 1.8906, 0, 0, 1.8906, -1.8906, 0, 3.7812998, 0, 1.8906, 1.8906, 0, 0, 1.8906, 1.8906, 0, -5.6719, 0, 0, 1.8906, 1.8906, 1.8906, 1.8906, 0, 0, 3.7812998, 0, 0, 1.8906, 1.8906, -1.8906, 1.8906, 0, 0, -5.6719, 0, -1.8906, 1.8906, 0, 0, 1.8906, 1.8906, 0, 3.7812998, 0, -1.8906, 1.8906, 0, 0, 1.8906, -1.8906, 0, -5.6719, 0, 0, 1.8906, -1.8906, -1.8906, 1.8906, 0)
+
+[node name="Laser" type="Area3D" unique_id=1818228579]
+collision_layer = 4
+collision_mask = 24
+script = ExtResource("1_j5ksa")
+
+[node name="Red" type="MeshInstance3D" parent="." unique_id=587776241]
+transform = Transform3D(0.3, 0, 0, 0, -1.3113417e-08, -0.3, 0, 0.3, -1.3113417e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_of1pi")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1561764241]
+transform = Transform3D(0.3, 0, 0, 0, -1.3113417e-08, -0.3, 0, 0.3, -1.3113417e-08, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_j5ksa")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1164062324]
+stream = ExtResource("3_ian0l")
+volume_db = -19.375

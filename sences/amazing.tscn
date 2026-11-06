@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b6chy654q6ggu"]
+
+[ext_resource type="Texture2D" uid="uid://dn8jg3adcftw5" path="res://picture/Shocked-black-guy-grabbing-head-meme-5.jpg" id="1_8qexf"]
+[ext_resource type="Script" uid="uid://drtjdafqdij1r" path="res://sences/amazing.gd" id="1_o8r5m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8r5m"]
+albedo_texture = ExtResource("1_8qexf")
+
+[sub_resource type="SphereMesh" id="SphereMesh_o8r5m"]
+material = SubResource("StandardMaterial3D_o8r5m")
+
+[node name="amazing" type="Node3D" unique_id=2092262334]
+script = ExtResource("1_o8r5m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=195287297]
+transform = Transform3D(-1.2973875, -0.073212296, -0.037747595, -0.023596482, 0.9011133, -0.93671626, 0.07891847, -0.93414885, -0.9006315, 0, 0, 0)
+mesh = SubResource("SphereMesh_o8r5m")

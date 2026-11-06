@@ -1,0 +1,27 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dasc6agw6gqpj"]
+
+[ext_resource type="Texture2D" uid="uid://chrilf4o8alyq" path="res://picture/95d1cc4f-0819-42a7-8f36-66b108bbf476-0.png" id="1_1amdm"]
+[ext_resource type="Texture2D" uid="uid://brok8flftlxrc" path="res://picture/95d1cc4f-0819-42a7-8f36-66b108bbf476-1.png" id="2_nimhv"]
+[ext_resource type="Texture2D" uid="uid://yfqkionxv4u7" path="res://picture/95d1cc4f-0819-42a7-8f36-66b108bbf476-2.png" id="3_dvgls"]
+[ext_resource type="Texture2D" uid="uid://dvosd5816d0nq" path="res://picture/95d1cc4f-0819-42a7-8f36-66b108bbf476-3.png" id="4_y66mq"]
+
+[resource]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1amdm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nimhv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dvgls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y66mq")
+}],
+"loop": 1,
+"name": &"neurosama.evil",
+"speed": 5.0
+}]
