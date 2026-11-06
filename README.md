@@ -3,7 +3,15 @@
 一个用 Godot 4 做的 3D 太空射击 + Roguelike 成长小游戏。
 
 飞船在倾斜视角的太空场景里左右闪避，发射激光击碎陨石，
-击杀累积升级、三选一强化、攒金币在商店里永久成长，最后挑战会放弹幕的 BOSS。
+击杀累积升级、五选一强化、攒金币在商店里永久成长，最后挑战会放弹幕的 BOSS。
+
+## ⬇️ 直接玩
+
+不想装 Godot 的话，下载打包好的 Windows 版本，双击即可运行：
+
+**[⬇ 下载 cx-3D-roguelike v1.0.0 (Windows x64, 单文件 108 MB)](https://github.com/cx-ya/cx-3D-roguelike/releases/latest)**
+
+> Windows 10/11 x64 · 需要支持 Vulkan 的显卡 · 无需安装
 
 ---
 
