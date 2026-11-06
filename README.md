@@ -137,7 +137,7 @@ godot --headless --path . --export-release "Windows Desktop" build/game.exe
 ## 💾 Save data
 
 ```
-Windows: %APPDATA%\Godot\app_userdata\space shooter 3d\save.cfg
+Windows: %APPDATA%\Godot\app_userdata\cx-3D-roguelike\save.cfg
 ```
 
 The save is **not** inside the executable — a fresh machine starts a fresh run.
